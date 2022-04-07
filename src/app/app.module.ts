@@ -19,7 +19,11 @@ import { AutocompleteGroupingComponent } from './components/autocomplete-groupin
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, AutocompleteComponent, AutocompleteGroupingComponent],
+  declarations: [
+    AppComponent,
+    AutocompleteComponent,
+    AutocompleteGroupingComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
