@@ -41,45 +41,46 @@ export class AutocompleteGroupingComponent implements OnInit {
     );
   }
 
-  public getKey(obj: Group): string {
+  public getGroupKey(obj: Group): string {
     return Object.keys(obj)[0];
   }
 
-  public getValue(obj: Group): string[] {
+  public getGroupArray(obj: Group): string[] {
     return Object.values(obj)[0];
   }
 
-  private filterValue(obj: Group, filterValue: string): string[] {
-    return this.getValue(obj).filter((optionValue) =>
-      optionValue.toLowerCase().includes(filterValue)
+  private filterValues(obj: Group, filterValue: string): string[] {
+    return this.getGroupArray(obj).filter((optionValue) =>
+      this.isInputIncluded(optionValue, filterValue)
     );
   }
 
-  private filterKey(obj: Group, filterValue: string): boolean {
-    return this.getKey(obj).toLowerCase().includes(filterValue);
+  private isInputIncluded(source: string, input: string): boolean {
+    return source.toLowerCase().includes(input);
   }
 
-  private filter(value: string): Group[] {
-    const filterValue = value.toLowerCase();
+  private filter(input: string): Group[] {
+    const lowerCaseInput = input.toLowerCase();
 
     return this.groups
       .map((group) => {
-        if (this.filterKey(group, filterValue)) {
+        if (this.isInputIncluded(this.getGroupKey(group), lowerCaseInput)) {
           return group;
         } else {
-          const values = this.filterValue(group, filterValue);
-          const key = this.getKey(group);
+          const values = this.filterValues(group, lowerCaseInput);
+          const key = this.getGroupKey(group);
 
           return { [key]: values };
         }
       })
       .filter((group) => {
         return (
-          this.filterKey(group, filterValue) ||
-          this.filterValue(group, filterValue).length
+          this.isInputIncluded(this.getGroupKey(group), lowerCaseInput) ||
+          this.filterValues(group, lowerCaseInput).length
         );
       });
   }
+
   trackByFn(_: string, item: Group) {
     return item;
   }
