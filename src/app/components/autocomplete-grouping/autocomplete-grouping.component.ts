@@ -51,31 +51,31 @@ export class AutocompleteGroupingComponent implements OnInit {
 
   private filterValues(obj: Group, filterValue: string): string[] {
     return this.getGroupArray(obj).filter((optionValue) =>
-      this.isInputIncluded(optionValue, filterValue)
+      this.isStringIncluded(optionValue, filterValue)
     );
   }
 
-  private isInputIncluded(source: string, input: string): boolean {
-    return source.toLowerCase().includes(input);
+  private isStringIncluded(source: string, value: string): boolean {
+    return source.toLowerCase().includes(value.toLowerCase());
   }
 
   private filter(input: string): Group[] {
-    const lowerCaseInput = input.toLowerCase();
+    const lowerCaseInput = input.toLowerCase().trim();
 
     return this.groups
       .map((group) => {
-        if (this.isInputIncluded(this.getGroupKey(group), lowerCaseInput)) {
+        if (this.isStringIncluded(this.getGroupKey(group), lowerCaseInput)) {
           return group;
         } else {
-          const values = this.filterValues(group, lowerCaseInput);
+          const filteredValues = this.filterValues(group, lowerCaseInput);
           const key = this.getGroupKey(group);
 
-          return { [key]: values };
+          return { [key]: filteredValues };
         }
       })
       .filter((group) => {
         return (
-          this.isInputIncluded(this.getGroupKey(group), lowerCaseInput) ||
+          this.isStringIncluded(this.getGroupKey(group), lowerCaseInput) ||
           this.filterValues(group, lowerCaseInput).length
         );
       });
