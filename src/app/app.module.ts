@@ -18,6 +18,9 @@ import { AutocompleteComponent } from './components/autocomplete/autocomplete.co
 import { AutocompleteGroupingComponent } from './components/autocomplete-grouping/autocomplete-grouping.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { LayoutComponent } from './components/layout/layout.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,17 +30,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-
     NbEvaIconsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     AppRoutingModule,
-
-    NbLayoutModule,
-    NbSidebarModule.forRoot(),
     NbButtonModule,
     NbAutocompleteModule,
     NbCardModule,
     ReactiveFormsModule,
+    LayoutComponent,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

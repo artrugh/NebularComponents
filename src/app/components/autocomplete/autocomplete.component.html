@@ -1,21 +1,21 @@
-<nb-card size="small">
+<nb-card size="medium">
   <nb-card-body>
     <input
-      #autoInput
-      nbInput
       type="text"
-      (input)="onChange()"
       placeholder="Enter value"
       [nbAutocomplete]="auto"
+      [formControl]="inputFormControl"
     />
 
-    <nb-autocomplete #auto (selectedChange)="onSelectionChange($event)">
-      <nb-option
-        *ngFor="let option of filteredOptions$ | async"
-        [value]="option"
+    <nb-autocomplete #auto>
+      <nb-option-group
+        *ngFor="let group of filteredGroups$ | async"
+        [title]="getGroupKey(group)"
       >
-        {{ option }}
-      </nb-option>
+        <nb-option *ngFor="let option of getGroupArray(group)" [value]="option">
+          {{ option }}
+        </nb-option>
+      </nb-option-group>
     </nb-autocomplete>
   </nb-card-body>
 </nb-card>
