@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     AutocompleteComponent,
     AutocompleteGroupingComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     NbAutocompleteModule,
     NbCardModule,
     ReactiveFormsModule,
-    LayoutComponent,
+    NbLayoutModule,
     HttpClientModule,
   ],
   providers: [],
